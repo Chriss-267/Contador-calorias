@@ -1,15 +1,11 @@
-import { ChangeEvent, Dispatch, useEffect, useState } from "react"
+import { ChangeEvent, useEffect, useState } from "react"
 import { v4 as uuidv4 } from "uuid"
 import { categories } from "../data/categories"
 import { activity } from "../types"
-import { ActivityActions } from "../reducers/activityReducer"
-import { ActivityState } from "../reducers/activityReducer"
+import { useActivity } from "../hooks/useActivity"
 
 //npm i uuid para crear id unicos
-type FormProps = {
-    dispatch:Dispatch<ActivityActions>
-    state:ActivityState
-}
+
 
 const initialState:activity = {
     id: uuidv4(),
@@ -18,9 +14,9 @@ const initialState:activity = {
     calories:0
 }
 
-function Form({dispatch, state}:FormProps) {
+function Form() {
 
-
+    const {state, dispatch} = useActivity()
     const [activity, setActivity] = useState<activity>(initialState)
 
     useEffect(() => {
